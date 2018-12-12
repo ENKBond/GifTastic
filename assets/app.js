@@ -17,6 +17,16 @@ function makeButtons() {
     }
 }
 
+$(".trigger_popup").click(function(){
+    $('.hover_bkgr').show();
+ });
+ $('.hover_bkgr').click(function(){
+     $('.hover_bkgr').hide();
+ });
+ $('.popupCloseButton').click(function(){
+     $('.hover_bkgr').hide();
+ });
+
 $("#submit").on("click", function(event) {
     event.preventDefault();
     var actorName = $("#addTopic").val().trim();
@@ -27,21 +37,26 @@ $("#submit").on("click", function(event) {
 makeButtons();
 
 $("button").on("click", function() {
+    $("#gifs").empty();
     var person = $(this).attr("data-name");
-    var updatePerson = person.split(' ').join('+');
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+updatePerson+"&api_key=ojHUH4Kcc4NcAk1Py8pPCZ9FYKBf8Gfe&limit=10";
+    // var updatePerson = person.split(' ').join('+');
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+person+"&api_key=ZGRrIOC3BqkaERK8RULPbE0CNs1qFcmk&limit=10";
     console.log(this);
     $.ajax({
         url: queryURL,
-        method:"GET"
+        method: "GET"
     }).then(function(response) {
         var results = response.data;
+        console.log(results);
         for (var i=0; i<results.length; i++) {
+            console.log(results[i]);
             if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                var gifDiv = $("<div");
+                var gifDiv = $("<div>");
+                console.log(results[i]);
                 var p = $("<p>").text("Rating: " + results[i].rating);
+                
                 var personImage = $("<img>");
-                personImage.attr("src", results[i].images.fixed_height_still.url);
+                personImage.attr("src", results[i].images.fixed_width_still.url);
                 gifDiv.append(p);
                 gifDiv.append(personImage)
                 $("#gifs").prepend(gifDiv);
@@ -50,5 +65,6 @@ $("button").on("click", function() {
     });
     console.log(queryURL);
 });
+
 
 });
