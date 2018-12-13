@@ -56,11 +56,14 @@
     display: inline-block;
 }
 
-/* #gifs {
-    /* float:left; */
-    /* display: inline;
-} */ 
-
-p img {
-    display: inline-block;
+#gifs > div {
+    float: left;
 }
+
+img {
+    padding: 5px;
+    margin: 5px;
+    height: 200px;
+    width: 280px;
+}
+
