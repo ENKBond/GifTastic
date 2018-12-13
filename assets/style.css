@@ -67,3 +67,10 @@ img {
     width: 280px;
 }
 
+body {
+    background-image: url('images/ahmet-yalcinkaya-84327-unsplash\ \(2\).jpg');
+}
+
+p {
+    background:  lightgray;
+}
